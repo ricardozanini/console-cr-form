@@ -20,6 +20,8 @@ import {
 import Page1 from "./pages/Page1";
 import Page2 from "./pages/Page2";
 import Page3 from "./pages/Page3";
+import EachPage from "./EachPage";
+import SubPage from "./SubPage";
 import CopyToClipboard from "react-copy-to-clipboard";
 import * as utils from "./common/CommonUtils";
 import Dot from "dot-object";
@@ -339,7 +341,8 @@ import CopyToClipboard from "react-copy-to-clipboard";
             <tbody>
               <tr>
                 <td>
-                  <Page1
+                  <SubPage
+                    pageNumber={0}
                     jsonForm={this.state.jsonForm}
                     jsonSchema={this.state.jsonSchema}
                     saveJsonForm={this.saveJsonForm}
@@ -347,12 +350,15 @@ import CopyToClipboard from "react-copy-to-clipboard";
                     showPopup={this.state.showPopup}
                     togglePopup={this.togglePopup}
                     setResultYaml={this.setResultYaml}
+                    pageDef={this.state.jsonForm.pages[0]}
+                    children={this.state.children}
                   />
                 </td>
               </tr>
               <tr>
                 <td>
-                  <Page2
+                  <SubPage
+                    pageNumber={1}
                     jsonForm={this.state.jsonForm}
                     jsonSchema={this.state.jsonSchema}
                     saveJsonForm={this.saveJsonForm}
@@ -360,12 +366,15 @@ import CopyToClipboard from "react-copy-to-clipboard";
                     showPopup={this.state.showPopup}
                     togglePopup={this.togglePopup}
                     setResultYaml={this.setResultYaml}
+                    pageDef={this.state.jsonForm.pages[1]}
+                    children={this.state.children}
                   />
                 </td>
               </tr>
               <tr>
                 <td>
-                  <Page3
+                  <SubPage
+                    pageNumber={2}
                     jsonForm={this.state.jsonForm}
                     jsonSchema={this.state.jsonSchema}
                     saveJsonForm={this.saveJsonForm}
@@ -373,6 +382,8 @@ import CopyToClipboard from "react-copy-to-clipboard";
                     showPopup={this.state.showPopup}
                     togglePopup={this.togglePopup}
                     setResultYaml={this.setResultYaml}
+                    pageDef={this.state.jsonForm.pages[2]}
+                    children={this.state.children}
                   />
                 </td>
               </tr>

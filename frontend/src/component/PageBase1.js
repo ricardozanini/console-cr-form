@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 //import ReactDOM from "react-dom";
-import { Form } from "@patternfly/react-core";
+//import { Form } from "@patternfly/react-core";
 import {
   FormGroup,
   TextInput,
@@ -18,7 +18,7 @@ import JSONPATH from "jsonpath";
 //import { OPERATOR_NAME } from "./common/GuiConstants";
 import * as utils from "./common/CommonUtils";
 
-export default class PageBase extends Component {
+export default class PageBase1 extends Component {
   componentDidMount() {
     this.renderComponents();
   }
@@ -158,8 +158,9 @@ export default class PageBase extends Component {
   renderComponents = () => {
     //const pageDef = MockupData_JSON.pages[1];
     //console.log("!!!!!!!!!! renderComponents pageDef2: " + JSON.stringify(pageDef));
-    const pageDef = this.state.jsonForm.pages[this.state.pageNumber];
-
+    // const pageDef = this.state.jsonForm.pages[this.state.pageNumber];
+    const pageDef = this.props.pageDef;
+    console.log("pageDefpageDef" + JSON.stringify(pageDef));
     if (pageDef != null && pageDef != "") {
       var children = [];
 
@@ -185,7 +186,7 @@ export default class PageBase extends Component {
       //return children;
       this.setState({ children });
     } else {
-      console.log("do nothing, it's an empty page.");
+      //console.log("do nothing, it's an empty page.");
       //do nothing, it's an empty page.
     }
   };
@@ -257,10 +258,8 @@ export default class PageBase extends Component {
       .getElementById(event.target.id)
       .getAttribute("fieldnumber");
     //console.log("deleteOneFieldForObj, : " + JSON.parse(fieldnumber));
-
-    var field = this.state.jsonForm.pages[this.state.pageNumber].fields[
-      fieldnumber
-    ];
+    const pageDef = this.props.pageDef;
+    var field = pageDef.fields[fieldnumber];
     //console.log("deleteOneFieldForObj, field.min current value: " + field.min);
 
     const sampleObjStr = JSON.stringify(
@@ -295,10 +294,8 @@ export default class PageBase extends Component {
       .getAttribute("fieldnumber");
 
     console.log("addOneFieldForObj, fieldnumber: " + JSON.parse(fieldnumber));
-
-    const field = this.state.jsonForm.pages[this.state.pageNumber].fields[
-      fieldnumber
-    ];
+    const pageDef = this.props.pageDef;
+    const field = pageDef.fields[fieldnumber];
     console.log("addOneFieldForObj, field.min current value: " + field.min);
 
     const sampleObj = this.retrieveObjectMap(field, fieldnumber);
@@ -328,9 +325,8 @@ export default class PageBase extends Component {
   };
 
   buildObject(fieldnumber) {
-    const field = this.state.jsonForm.pages[this.state.pageNumber].fields[
-      fieldnumber
-    ];
+    const pageDef = this.props.pageDef;
+    const field = pageDef.fields[fieldnumber];
 
     var randomNum = Math.floor(Math.random() * 100000000 + 1);
 
@@ -675,9 +671,8 @@ export default class PageBase extends Component {
   }
 
   buildSection(fieldnumber) {
-    const field = this.state.jsonForm.pages[this.state.pageNumber].fields[
-      fieldnumber
-    ];
+    const pageDef = this.props.pageDef;
+    const field = pageDef.fields[fieldnumber];
 
     var randomNum = Math.floor(Math.random() * 100000000 + 1);
     const fieldGroupId =
@@ -744,9 +739,8 @@ export default class PageBase extends Component {
   }
 
   buildMutualExclusiveObject(fieldnumber) {
-    const field = this.state.jsonForm.pages[this.state.pageNumber].fields[
-      fieldnumber
-    ];
+    const pageDef = this.props.pageDef;
+    const field = pageDef.fields[fieldnumber];
 
     // var randomNum = Math.floor(Math.random() * 100000000 + 1);
 
@@ -884,12 +878,7 @@ export default class PageBase extends Component {
   }
 
   render() {
-    //return <div>{this.state.children}</div>;
-    return (
-      <Form id="temp_form">
-        <div>{this.state.children}</div>
-      </Form>
-    );
+    return <div>{this.state.children}</div>;
   }
 
   /*
