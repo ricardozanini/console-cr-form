@@ -1,60 +1,73 @@
 import JSONPATH from "jsonpath";
+import { FIELD_TYPE } from "./FieldGeneratorFactory";
 
 export class FieldGeneratorBase {
-  fieldJsx = "";
-  fieldGroupId;
-  fieldGroupKey;
-  fieldId;
-  fieldKey;
-  field;
-  jsonSchema;
+    fieldGroupId;
+    fieldGroupKey;
+    fieldId;
+    fieldKey;
+    field;
+    jsonSchema;
+    fieldNumber;
+    attrs;
 
-  constructor({ field, fieldNumber, pageNumber, jsonSchema }) {
-    const randomNum = this.generateRandomId();
+    constructor({ field, fieldNumber, pageNumber, jsonSchema, attrs }) {
+        const randomNum = this.generateRandomId();
 
-    this.fieldGroupId =
-      pageNumber +
-      "-fieldGroup-" +
-      fieldNumber +
-      "-" +
-      field.label +
-      "-" +
-      randomNum;
-    this.fieldGroupKey = "fieldGroupKey-" + this.fieldGroupId;
-    this.fieldId =
-      pageNumber +
-      "-field-" +
-      fieldNumber +
-      "-" +
-      field.label +
-      "-" +
-      randomNum;
-    this.fieldKey = "fieldKey-" + this.fieldId;
-    this.field = field;
-    this.jsonSchema = jsonSchema;
-  }
-
-  generateRandomId() {
-    return Math.floor(Math.random() * 100000000 + 1);
-  }
-
-  generateField() {
-    if (this.supports() == this.field.type) {
-      this.doGenerateField();
+        this.fieldGroupId =
+            pageNumber +
+            "-fieldGroup-" +
+            fieldNumber +
+            "-" +
+            field.label +
+            "-" +
+            randomNum;
+        this.fieldGroupKey = "fieldGroupKey-" + this.fieldGroupId;
+        this.fieldId =
+            pageNumber +
+            "-field-" +
+            fieldNumber +
+            "-" +
+            field.label +
+            "-" +
+            randomNum;
+        this.fieldKey = "fieldKey-" + this.fieldId;
+        this.field = field;
+        this.jsonSchema = jsonSchema;
+        this.fieldNumber = fieldNumber;
+        this.attrs = attrs;
     }
-  }
 
-  findValueFromSchema(jsonPath) {
-    var queryResults = JSONPATH.query(this.jsonSchema, jsonPath);
-    return queryResults[0];
-  }
+    generateRandomId() {
+        return Math.floor(Math.random() * 100000000 + 1);
+    }
 
-  // hook
-  doGenerateField() {
-    throw new Error("Must be implemented by child class");
-  }
+    generateField() {
+        if (this.supports() == this.field.type || this.supports() == FIELD_TYPE.text) {
+            this.doGenerateField();
+        }
+    }
 
-  supports() {
-    throw new Error("Must be implemented by child class");
-  }
+    findValueFromSchema(jsonPath) {
+        var queryResults = JSONPATH.query(this.jsonSchema, jsonPath);
+        return queryResults[0];
+    }
+
+    // hook
+    doGenerateField() {
+        throw new Error("Must be implemented by child class");
+    }
+
+    supports() {
+        throw new Error("Must be implemented by chil class");
+    }
+
+    setState(state) {
+        //TODO: handle to parent
+    }
+
+    //TODO: what to do with this?
+    onChange = value => {
+        console.log("onChange with value: " + value);
+    };
 }
