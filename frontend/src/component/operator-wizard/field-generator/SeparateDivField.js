@@ -1,9 +1,9 @@
 import React from "react";
-import { FieldGeneratorBase } from "./FieldGeneratorBase";
+import { FieldBase } from "./FieldBase";
 
-import { FIELD_TYPE } from "./FieldGeneratorFactory";
+import { FIELD_TYPE } from "./FieldFactory";
 
-export class SeparateDivField extends FieldGeneratorBase {
+export class SeparateDivField extends FieldBase {
   constructor(props) {
     super(props);
   }

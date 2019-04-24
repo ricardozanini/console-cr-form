@@ -1,13 +1,13 @@
 import React from "react";
-import { FieldGeneratorBase } from "./FieldGeneratorBase";
+import { FieldBase } from "./FieldBase";
 import {
   FormGroup,
   Radio
 } from "@patternfly/react-core";
 
-import { FIELD_TYPE } from "./FieldGeneratorFactory";
+import { FIELD_TYPE } from "./FieldFactory";
 
-export class RadioButtonField extends FieldGeneratorBase {
+export class RadioButtonField extends FieldBase {
   constructor(props) {
     super(props);
   }

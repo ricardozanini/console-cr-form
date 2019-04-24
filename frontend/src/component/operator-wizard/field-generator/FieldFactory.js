@@ -7,13 +7,12 @@ import { PasswordField } from "./PasswordField";
 import { CheckboxField } from "./CheckboxField";
 import { SeparateDivField } from "./SeparateDivField";
 import { SectionField } from "./SectionField";
-import { TextField } from "./TextField";
+import { DefaultTextField } from "./DefaultTextField";
 
 export const FIELD_TYPE = {
     dropdown: "dropDown",
     textArea: "textArea",
     radioButton: "radioButton",
-    // have to figure this out, skipping for now
     object: "object",
     email: "email",
     url: "url",
@@ -21,10 +20,11 @@ export const FIELD_TYPE = {
     checkbox: "checkbox",
     seperateObjDiv: "seperateObjDiv",
     section: "section",
-    text : "text"
+    text: "text",
+    section_radio: "section_radio"
 };
 
-export class FieldGeneratorFactory {
+export class FieldFactory {
     /**
      * Creates a single instance of one field
      */
@@ -65,8 +65,8 @@ export class FieldGeneratorFactory {
             case FIELD_TYPE.section:
                 generator = new SectionField(props);
                 break;
-            default:
-                generator = new TextField(props);
+            default: 
+                generator = new DefaultTextField(props);
         }
 
         return generator;
@@ -80,7 +80,7 @@ export class FieldGeneratorFactory {
         //TODO: make sure that this check actually works
         if (fields != null && fields != "") {
             fields.forEach((field, fieldNumber) => {
-                var fieldGenerator = FieldGeneratorFactory.newInstance(
+                var fieldGenerator = FieldFactory.newInstance(
                     field,
                     fieldNumber,
                     0,

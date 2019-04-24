@@ -1,7 +1,7 @@
 import JSONPATH from "jsonpath";
-import { FIELD_TYPE } from "./FieldGeneratorFactory";
+import { FIELD_TYPE } from "./FieldFactory";
 
-export class FieldGeneratorBase {
+export class FieldBase {
     fieldGroupId;
     fieldGroupKey;
     fieldId;
@@ -62,8 +62,13 @@ export class FieldGeneratorBase {
         throw new Error("Must be implemented by chil class");
     }
 
-    setState(state) {
+    //TODO: this is wrong, figure out another approach
+    setParentState(state) {
         //TODO: handle to parent
+    }
+
+    getParentState() {
+        //TODO: let to parent
     }
 
     //TODO: what to do with this?

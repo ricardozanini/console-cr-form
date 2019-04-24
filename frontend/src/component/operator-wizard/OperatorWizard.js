@@ -3,7 +3,7 @@ import React, { Component } from "react";
 //import { Wizard } from "@patternfly/react-core";
 
 import { FormJsonLoader } from "./FormJsonLoader";
-import { FieldGeneratorFactory } from "./field-generator/FieldGeneratorFactory";
+import { FieldFactory } from "./field-generator/FieldFactory";
 
 export default class OperatorWizard extends Component {
     constructor(props) {
@@ -18,8 +18,9 @@ export default class OperatorWizard extends Component {
     }
 
     componentDidMount() {
+        //TODO: create the page, and then the page can create it's own components
         var pageDef = this.formJsonLoader.jsonForm.pages[0];
-        var children = FieldGeneratorFactory.newInstances(pageDef.fields, this.formJsonLoader.jsonSchema);
+        var children = FieldFactory.newInstances(pageDef.fields, this.formJsonLoader.jsonSchema);
         this.setState({ children });
     }
 

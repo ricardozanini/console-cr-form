@@ -1,13 +1,13 @@
 import React from "react";
-import { FieldGeneratorBase } from "./FieldGeneratorBase";
+import { FieldBase } from "./FieldBase";
 import {
     FormGroup,
     Button
 } from "@patternfly/react-core";
 
-import { FIELD_TYPE, FieldGeneratorFactory } from "./FieldGeneratorFactory";
+import { FIELD_TYPE, FieldFactory } from "./FieldFactory";
 
-export class SectionField extends FieldGeneratorBase {
+export class SectionField extends FieldBase {
     constructor(props) {
         super(props);
     }
@@ -36,7 +36,7 @@ export class SectionField extends FieldGeneratorBase {
             </FormGroup>
         );
 
-        var children = FieldGeneratorFactory.newInstances(this.field.fields, null);
+        var children = FieldFactory.newInstances(this.field.fields, null);
         jsxArray.push(fieldJsx);
         fieldJsx = (
             <div id={section} key={section} style={{ display: "none" }}>

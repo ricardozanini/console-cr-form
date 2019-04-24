@@ -1,13 +1,13 @@
 import React from "react";
-import { FieldGeneratorBase } from "./FieldGeneratorBase";
+import { FieldBase } from "./FieldBase";
 import {
   FormGroup,
   TextArea
 } from "@patternfly/react-core";
 
-import { FIELD_TYPE } from "./FieldGeneratorFactory";
+import { FIELD_TYPE } from "./FieldFactory";
 
-export class TextAreaField extends FieldGeneratorBase {
+export class TextAreaField extends FieldBase {
   constructor(props) {
     super(props);
   }

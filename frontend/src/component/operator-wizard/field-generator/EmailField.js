@@ -1,14 +1,14 @@
 import React from "react";
-import { FieldGeneratorBase } from "./FieldGeneratorBase";
+import { FieldBase } from "./FieldBase";
 import validator from "validator";
 import {
   FormGroup,
   TextInput
 } from "@patternfly/react-core";
 
-import { FIELD_TYPE } from "./FieldGeneratorFactory";
+import { FIELD_TYPE } from "./FieldFactory";
 
-export class EmailField extends FieldGeneratorBase {
+export class EmailField extends FieldBase {
   constructor(props) {
     super(props);
   }
@@ -37,11 +37,11 @@ export class EmailField extends FieldGeneratorBase {
   onChangeEmail = value => {
     if (value != null && value != "" && !validator.isEmail(value)) {
       console.log("not valid email address: " + value);
-      this.setState({
+      this.setParentState({
         validationMessageEmail: "not valid email address"
       });
     } else {
-      this.setState({
+      this.setParentState({
         validationMessageEmail: ""
       });
     }

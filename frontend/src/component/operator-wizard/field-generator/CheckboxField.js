@@ -1,13 +1,13 @@
 import React from "react";
-import { FieldGeneratorBase } from "./FieldGeneratorBase";
+import { FieldBase } from "./FieldBase";
 import {
   FormGroup,
   Checkbox
 } from "@patternfly/react-core";
 
-import { FIELD_TYPE } from "./FieldGeneratorFactory";
+import { FIELD_TYPE } from "./FieldFactory";
 
-export class CheckboxField extends FieldGeneratorBase {
+export class CheckboxField extends FieldBase {
   constructor(props) {
     super(props);
   }
@@ -43,7 +43,7 @@ export class CheckboxField extends FieldGeneratorBase {
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
 
-    this.setState({ [event.target.name]: value });
+    this.setParentState({ [event.target.name]: value });
   };
 
 }

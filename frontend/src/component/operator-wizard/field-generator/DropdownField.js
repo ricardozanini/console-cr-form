@@ -1,5 +1,5 @@
 import React from "react";
-import { FieldGeneratorBase } from "./FieldGeneratorBase";
+import { FieldBase } from "./FieldBase";
 import {
   FormGroup,
   FormSelectOption,
@@ -7,9 +7,9 @@ import {
 } from "@patternfly/react-core";
 
 import * as utils from "../../common/CommonUtils";
-import { FIELD_TYPE } from "./FieldGeneratorFactory";
+import { FIELD_TYPE } from "./FieldFactory";
 
-export class DropdownField extends FieldGeneratorBase {
+export class DropdownField extends FieldBase {
   constructor(props) {
     super(props);
   }

@@ -1,13 +1,13 @@
 import React from "react";
-import { FieldGeneratorBase } from "./FieldGeneratorBase";
+import { FieldBase } from "./FieldBase";
 import {
   FormGroup,
   TextInput
 } from "@patternfly/react-core";
 
-import { FIELD_TYPE } from "./FieldGeneratorFactory";
+import { FIELD_TYPE } from "./FieldFactory";
 
-export class PasswordField extends FieldGeneratorBase {
+export class PasswordField extends FieldBase {
   constructor(props) {
     super(props);
   }

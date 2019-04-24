@@ -1,14 +1,14 @@
 import React from "react";
-import { FieldGeneratorBase } from "./FieldGeneratorBase";
+import { FieldBase } from "./FieldBase";
 import validator from "validator";
 import {
   FormGroup,
   TextInput
 } from "@patternfly/react-core";
 
-import { FIELD_TYPE } from "./FieldGeneratorFactory";
+import { FIELD_TYPE } from "./FieldFactory";
 
-export class UrlField extends FieldGeneratorBase {
+export class UrlField extends FieldBase {
   constructor(props) {
     super(props);
   }
@@ -39,11 +39,11 @@ export class UrlField extends FieldGeneratorBase {
   onChangeUrl = value => {
     if (value != null && value != "" && !validator.isURL(value)) {
       console.log("not valid URL " + value);
-      this.setState({
+      this.setParentState({
         validationMessageUrl: "not valid URL"
       });
     } else {
-      this.setState({
+      this.setParentState({
         validationMessageUrl: ""
       });
     }
