@@ -52,8 +52,15 @@ export class FieldBase {
   }
 
   findValueFromSchema(jsonPath) {
-    var queryResults = JSONPATH.query(this.jsonSchema, jsonPath);
-    return queryResults[0];
+    try {
+      var queryResults = JSONPATH.query(this.jsonSchema, jsonPath);
+      if (Array.isArray(queryResults) && queryResults.length > 0) {
+        return queryResults[0];
+      }
+    } catch (error) {
+      console.debug("Failed to find a value from schema", error);
+    }
+    return [];
   }
 
   // hook
