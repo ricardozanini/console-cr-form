@@ -1,4 +1,5 @@
 import { FieldFactory } from "./field-factory/FieldFactory";
+import { ButtonFactory } from "./button-factory/ButtonFactory";
 
 export class ElementFactory {
   /**
@@ -8,7 +9,7 @@ export class ElementFactory {
     const children = [];
 
     children.push(FieldFactory.newInstances(fieldDefs, jsonSchema, pageNumber));
-
+    children.push(ButtonFactory.newInstances(buttonDefs, pageNumber));
     return children;
   }
 }

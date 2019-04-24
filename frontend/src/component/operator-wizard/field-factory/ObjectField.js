@@ -19,7 +19,7 @@ export class ObjectField extends FieldBase {
           id={this.fieldId}
           key={this.fieldKey}
           fieldnumber={this.fieldNumber}
-        //onClick={this.addOneFieldForObj}
+          //onClick={this.addOneFieldForObj}
         >
           Add new {this.field.label}
         </Button>
@@ -28,7 +28,7 @@ export class ObjectField extends FieldBase {
           id={this.fieldId + 1}
           key={this.fieldKey + 1}
           fieldnumber={this.fieldNumber}
-        //onClick={this.deleteOneFieldForObj}
+          //onClick={this.deleteOneFieldForObj}
         >
           Delete last {this.field.label}
         </Button>
@@ -36,7 +36,7 @@ export class ObjectField extends FieldBase {
     );
     jsxArray.push(fieldJsx);
     jsxArray.push(
-      <div key={fieldGroupId + 1}>
+      <div key={this.fieldGroupId + 1}>
         =====================================================================
       </div>
     );
@@ -45,6 +45,4 @@ export class ObjectField extends FieldBase {
   supports() {
     return FIELD_TYPE.object;
   }
-
-
 }
