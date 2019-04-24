@@ -22,7 +22,7 @@ export const FIELD_TYPE = {
     seperateObjDiv: "seperateObjDiv",
     section: "section",
     text: "text",
-    section_radio: "section_radio"
+    sectionRadio: "section_radio"
 };
 
 export class FieldFactory {
@@ -66,7 +66,7 @@ export class FieldFactory {
             case FIELD_TYPE.section:
                 fieldReference = new SectionField(props);
                 break;
-            case FIELD_TYPE.section_radio:
+            case FIELD_TYPE.sectionRadio:
                 fieldReference = new SectionRadioField(props);
                 break;
             default: 

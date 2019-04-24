@@ -1,12 +1,12 @@
 import React from "react";
-import { FieldGeneratorBase } from "./FieldGeneratorBase";
+import { FieldBase } from "./FieldBase";
 import {
     Radio
 } from "@patternfly/react-core";
 
-import { FIELD_TYPE, FieldGeneratorFactory } from "./FieldGeneratorFactory";
+import { FIELD_TYPE, FieldFactory } from "./FieldFactory";
 
-export class SectionRadioField extends FieldGeneratorBase {
+export class SectionRadioField extends FieldBase {
     constructor(props) {
         super(props);
     }
@@ -39,7 +39,7 @@ export class SectionRadioField extends FieldGeneratorBase {
     }
 
     supports() {
-        return FIELD_TYPE.section_radio;
+        return FIELD_TYPE.sectionRadio;
     }
 
     handleChangeRadio = (checked, event) => {
