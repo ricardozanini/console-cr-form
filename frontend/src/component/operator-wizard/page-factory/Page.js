@@ -43,6 +43,6 @@ export class Page {
   }
 
   getJsx() {
-    return <div>{this.children}</div>;
+    return <div>{this.elements}</div>;
   }
 }
