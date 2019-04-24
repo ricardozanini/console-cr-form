@@ -8,7 +8,7 @@ export class SeparateDivField extends FieldBase {
     super(props);
   }
 
-  doGenerateField() {
+  doGenerateJsx() {
     return (
       <div key={this.fieldKey}>
         ------------------------------------------------------------------------------------------------------------------

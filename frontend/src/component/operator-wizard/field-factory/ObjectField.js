@@ -1,10 +1,6 @@
 import React from "react";
 import { FieldBase } from "./FieldBase";
-import validator from "validator";
-import {
-  FormGroup,
-  TextInput
-} from "@patternfly/react-core";
+import { ActionGroup, Button } from "@patternfly/react-core";
 
 import { FIELD_TYPE } from "./FieldFactory";
 
@@ -14,7 +10,7 @@ export class ObjectField extends FieldBase {
   }
 
   //TODO: finish this, might be the dynamic way of adding new components, now we can do it using our factory
-  doGenerateField() {
+  doGenerateJsx() {
     var jsxArray = [];
     var fieldJsx = (
       <ActionGroup fieldid={this.fieldGroupId} key={this.fieldGroupKey}>
@@ -23,7 +19,7 @@ export class ObjectField extends FieldBase {
           id={this.fieldId}
           key={this.fieldKey}
           fieldnumber={this.fieldNumber}
-          //onClick={this.addOneFieldForObj}
+        //onClick={this.addOneFieldForObj}
         >
           Add new {this.field.label}
         </Button>
@@ -32,7 +28,7 @@ export class ObjectField extends FieldBase {
           id={this.fieldId + 1}
           key={this.fieldKey + 1}
           fieldnumber={this.fieldNumber}
-          //onClick={this.deleteOneFieldForObj}
+        //onClick={this.deleteOneFieldForObj}
         >
           Delete last {this.field.label}
         </Button>

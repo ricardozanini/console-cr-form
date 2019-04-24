@@ -1,30 +1,27 @@
 import React from "react";
 import { FieldBase } from "./FieldBase";
-import {
-  FormGroup,
-  TextArea
-} from "@patternfly/react-core";
+import { FormGroup, TextInput } from "@patternfly/react-core";
 
 import { FIELD_TYPE } from "./FieldFactory";
 
-export class TextAreaField extends FieldBase {
+export class PasswordField extends FieldBase {
   constructor(props) {
     super(props);
   }
 
-  doGenerateField() {
+  doGenerateJsx() {
     return (
       <FormGroup
         label={this.field.label}
-        isRequired
         fieldId={this.fieldGroupId}
         key={this.fieldGroupKey}
       >
-        <TextArea
-          value={this.field.default}
-          name="horizontal-form-exp"
+        <TextInput
+          type="password"
           id={this.fieldId}
           key={this.fieldKey}
+          name={this.field.label}
+          onChange={this.onChange}
           jsonpath={this.field.jsonPath}
         />
       </FormGroup>
@@ -32,6 +29,6 @@ export class TextAreaField extends FieldBase {
   }
 
   supports() {
-    return FIELD_TYPE.textArea;
+    return FIELD_TYPE.password;
   }
 }

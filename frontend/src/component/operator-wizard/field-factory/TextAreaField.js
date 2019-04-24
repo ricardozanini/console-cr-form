@@ -1,40 +1,34 @@
 import React from "react";
 import { FieldBase } from "./FieldBase";
-import {
-  FormGroup,
-  TextInput
-} from "@patternfly/react-core";
+import { FormGroup, TextArea } from "@patternfly/react-core";
 
 import { FIELD_TYPE } from "./FieldFactory";
 
-export class DefaultTextField extends FieldBase {
+export class TextAreaField extends FieldBase {
   constructor(props) {
     super(props);
   }
 
-  doGenerateField() {
+  doGenerateJsx() {
     return (
       <FormGroup
         label={this.field.label}
+        isRequired
         fieldId={this.fieldGroupId}
         key={this.fieldGroupKey}
       >
-        <TextInput
-          isRequired
-          type="text"
+        <TextArea
+          value={this.field.default}
+          name="horizontal-form-exp"
           id={this.fieldId}
           key={this.fieldKey}
-          aria-describedby="horizontal-form-name-helper"
-          name={this.field.label}
-          onChange={this.onChange}
           jsonpath={this.field.jsonPath}
-          {...this.attrs}
         />
       </FormGroup>
     );
   }
 
   supports() {
-    return FIELD_TYPE.text;
+    return FIELD_TYPE.textArea;
   }
 }

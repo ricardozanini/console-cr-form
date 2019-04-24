@@ -14,7 +14,7 @@ export class DropdownField extends FieldBase {
     super(props);
   }
 
-  doGenerateField() {
+  doGenerateJsx() {
     var options = [];
     const tmpJsonPath = utils.getJsonSchemaPathForJsonPath(this.field.jsonPath);
     const optionValues = this.findValueFromSchema(tmpJsonPath + ".enum");

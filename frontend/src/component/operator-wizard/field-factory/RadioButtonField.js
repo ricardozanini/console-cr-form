@@ -1,9 +1,6 @@
 import React from "react";
 import { FieldBase } from "./FieldBase";
-import {
-  FormGroup,
-  Radio
-} from "@patternfly/react-core";
+import { FormGroup, Radio } from "@patternfly/react-core";
 
 import { FIELD_TYPE } from "./FieldFactory";
 
@@ -12,12 +9,12 @@ export class RadioButtonField extends FieldBase {
     super(props);
   }
 
-  doGenerateField() {
+  doGenerateJsx() {
     const fieldIdTrue = this.fieldId + "-true";
     const fieldKeyTrue = this.fieldKey + "-true";
     const fieldIdFalse = this.fieldId + "-false";
     const fieldKeyFalse = this.fieldKey + "-false";
-    fieldJsx = (
+    return (
       <FormGroup
         label={this.field.label}
         fieldId={this.fieldGroupId}

@@ -1,9 +1,6 @@
 import React from "react";
 import { FieldBase } from "./FieldBase";
-import {
-  FormGroup,
-  Checkbox
-} from "@patternfly/react-core";
+import { FormGroup, Checkbox } from "@patternfly/react-core";
 
 import { FIELD_TYPE } from "./FieldFactory";
 
@@ -12,9 +9,10 @@ export class CheckboxField extends FieldBase {
     super(props);
   }
 
-  doGenerateField() {
+  doGenerateJsx() {
     var name = "checkbox-" + this.fieldNumber;
-    var isChecked = this.field.default == "true" || this.field.default == "TRUE";
+    var isChecked =
+      this.field.default == "true" || this.field.default == "TRUE";
 
     return (
       <FormGroup
@@ -45,5 +43,4 @@ export class CheckboxField extends FieldBase {
 
     this.setParentState({ [event.target.name]: value });
   };
-
 }
