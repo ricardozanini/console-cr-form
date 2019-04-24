@@ -29,6 +29,7 @@ export default class Main extends Component {
   }
 
   createSteps() {
+    //TODO: move to stepbuilder
     var steps = [];
     var pages = this.formJsonLoader.jsonForm.pages;
     var children = PageFactory.newInstances(
@@ -36,12 +37,26 @@ export default class Main extends Component {
       this.formJsonLoader.jsonSchema
     );
     children.forEach((page, count) => {
-      steps.push({
-        id: count,
-        name: "Page " + count,
+      var step = {
+        id: count + 1,
+        name: "Page " + count + 1,
         component: page.getJsx(),
         enableNext: true //need to add logic
-      });
+      };
+      if (page.getSubPages().length > 0) {
+        step.steps = [];
+        page.getSubPages().forEach((subPage, subPageCount) => {
+          console.log("this is the subpage", subPage);
+          step.steps.push({
+            id: count + "" + subPageCount,
+            name: "SubPage " + subPageCount + 1,
+            component: subPage.getJsx(),
+            enableNext: true
+          });
+        });
+      }
+
+      steps.push(step);
     });
     console.log("Here the steps: ", steps);
     this.setState({ steps });

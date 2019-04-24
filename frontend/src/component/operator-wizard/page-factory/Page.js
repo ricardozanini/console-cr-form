@@ -6,7 +6,8 @@ import { PageFactory } from "./PageFactory";
  * The Page component to handle each element individually.
  */
 export class Page {
-  children = [];
+  elements = [];
+  subPages = [];
   /**
    * Default constructor for the PageComponent.
    *
@@ -15,29 +16,30 @@ export class Page {
   constructor(props) {
     this.props = props;
     this.loadPageChildren();
+    console.log("Page created", props.pageNumber);
   }
 
   loadPageChildren() {
     //let's add all elements
-    this.children.push(
-      ElementFactory.newInstances(
-        this.props.pageDef.fields,
-        this.props.pageDef.buttons,
-        this.props.jsonSchema,
-        this.props.pageNumber
-      )
+    this.elements = ElementFactory.newInstances(
+      this.props.pageDef.fields,
+      this.props.pageDef.buttons,
+      this.props.jsonSchema,
+      this.props.pageNumber
     );
     // ...and then all subpages
-    this.children.push(
-      PageFactory.newInstances(
-        this.props.pageDef.subPages,
-        this.props.jsonSchema
-      )
+    this.subPages = PageFactory.newInstances(
+      this.props.pageDef.subPages,
+      this.props.jsonSchema
     );
   }
 
-  getChildren() {
-    return this.children;
+  getElements() {
+    return this.elements;
+  }
+
+  getSubPages() {
+    return this.subPages;
   }
 
   getJsx() {
