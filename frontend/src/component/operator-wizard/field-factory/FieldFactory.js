@@ -79,22 +79,22 @@ export class FieldFactory {
   /**
    * Creates all instances based on a field array
    */
-  static newInstances(fields, jsonSchema, pageNumber) {
+  static newInstances(fieldDefs, jsonSchema, pageNumber) {
     var children = [];
-
-    fields.forEach((field, fieldNumber) => {
-      var fieldGenerator = FieldFactory.newInstance(
-        field,
-        fieldNumber,
-        pageNumber,
-        jsonSchema
-      );
-      if (fieldGenerator !== null) {
-        console.log("Generating a child", field);
-        children.push(fieldGenerator.doGenerateJsx());
-      }
-    });
-
+    if (fieldDefs !== undefined && fieldDefs !== null && fieldDefs !== "") {
+      fieldDefs.forEach((field, fieldNumber) => {
+        var fieldGenerator = FieldFactory.newInstance(
+          field,
+          fieldNumber,
+          pageNumber,
+          jsonSchema
+        );
+        if (fieldGenerator !== null) {
+          console.log("Generating a child", field);
+          children.push(fieldGenerator.doGenerateJsx());
+        }
+      });
+    }
     return children;
   }
 }

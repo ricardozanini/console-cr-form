@@ -16,8 +16,9 @@ export class DropdownField extends FieldBase {
 
   doGenerateJsx() {
     var options = [];
-    const tmpJsonPath = utils.getJsonSchemaPathForJsonPath(this.field.jsonPath);
-    const optionValues = this.findValueFromSchema(tmpJsonPath + ".enum");
+    //const tmpJsonPath = utils.getJsonSchemaPathForJsonPath(this.field.jsonPath);
+    //const optionValues = this.findValueFromSchema(tmpJsonPath + ".enum");
+    const optionValues = undefined;
     if (optionValues !== undefined) {
       optionValues.forEach(option => {
         const oneOption = {
@@ -27,8 +28,8 @@ export class DropdownField extends FieldBase {
         options.push(oneOption);
       });
     }
-    const helpText = this.findValueFromSchema(tmpJsonPath + ".description");
-
+    //const helpText = this.findValueFromSchema(tmpJsonPath + ".description");
+    const helpText = "";
     return (
       <FormGroup
         label={this.field.label}

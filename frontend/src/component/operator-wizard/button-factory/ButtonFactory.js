@@ -10,16 +10,22 @@ export class ButtonFactory {
    */
   static newInstances(buttonDefs, pageNumber) {
     var buttonsJsx = [];
-    buttonDefs.forEach((buttonDef, i) => {
-      var buttonElement = new ButtonElement({
-        buttonDef: buttonDef,
-        pageNumber: pageNumber,
-        buttonId: i
+    if (buttonDefs !== undefined && buttonDefs !== null && buttonDefs !== "") {
+      buttonDefs.forEach((buttonDef, i) => {
+        var buttonElement = new ButtonElement({
+          buttonDef: buttonDef,
+          pageNumber: pageNumber,
+          buttonId: i
+        });
+        buttonsJsx.push(buttonElement.generateJsx());
       });
-      buttonsJsx.push(buttonElement.generateJsx());
-    });
+    }
 
-    const actionGroupKey = pageNumber + "-action-group";
-    return <ActionGroup key={actionGroupKey}>{buttonsJsx}</ActionGroup>;
+    if (buttonsJsx.length > 0) {
+      const actionGroupKey = pageNumber + "-action-group";
+      return <ActionGroup key={actionGroupKey}>{buttonsJsx}</ActionGroup>;
+    }
+
+    return [];
   }
 }

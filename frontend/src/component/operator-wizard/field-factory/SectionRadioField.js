@@ -7,12 +7,15 @@ import { FIELD_TYPE, FieldFactory } from "./FieldFactory";
 export class SectionRadioField extends FieldBase {
   constructor(props) {
     super(props);
+    this.state = {
+      ssoORldap: ""
+    };
   }
 
   doGenerateJsx() {
     var section = this.field.label + "section";
     var jsxArray = [];
-    var isCheckedRadio = this.getParentState().ssoORldap === section;
+    var isCheckedRadio = this.state.ssoORldap === section;
 
     var fieldJsx = (
       <Radio
@@ -42,7 +45,7 @@ export class SectionRadioField extends FieldBase {
 
   handleChangeRadio = (checked, event) => {
     const value = event.currentTarget.value;
-    this.setParentState({ ssoORldap: value });
+    this.state = { ssoORldap: value };
 
     if (value == "LDAPsection") {
       document.getElementById("SSOsection").style.display = "none";
