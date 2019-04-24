@@ -8,6 +8,7 @@ import { CheckboxField } from "./CheckboxField";
 import { SeparateDivField } from "./SeparateDivField";
 import { SectionField } from "./SectionField";
 import { DefaultTextField } from "./DefaultTextField";
+import { SectionRadioField } from "./SectionRadioField";
 
 export const FIELD_TYPE = {
     dropdown: "dropDown",
@@ -29,7 +30,7 @@ export class FieldFactory {
      * Creates a single instance of one field
      */
     static newInstance(field, fieldNumber, pageNumber, jsonSchema) {
-        var generator;
+        var fieldReference;
         var props = {
             field: field,
             fieldNumber: fieldNumber,
@@ -39,37 +40,40 @@ export class FieldFactory {
         //TODO: rethink when we have the time
         switch (field.type) {
             case FIELD_TYPE.dropdown:
-                generator = new DropdownField(props);
+                fieldReference = new DropdownField(props);
                 break;
             case FIELD_TYPE.textArea:
-                generator = new TextAreaField(props);
+                fieldReference = new TextAreaField(props);
                 break;
             case FIELD_TYPE.radioButton:
-                generator = new RadioButtonField(props);
+                fieldReference = new RadioButtonField(props);
                 break;
             case FIELD_TYPE.email:
-                generator = new EmailField(props);
+                fieldReference = new EmailField(props);
                 break;
             case FIELD_TYPE.url:
-                generator = new UrlField(props);
+                fieldReference = new UrlField(props);
                 break;
             case FIELD_TYPE.password:
-                generator = new PasswordField(props);
+                fieldReference = new PasswordField(props);
                 break;
             case FIELD_TYPE.checkbox:
-                generator = new CheckboxField(props);
+                fieldReference = new CheckboxField(props);
                 break;
             case FIELD_TYPE.seperateObjDiv:
-                generator = new SeparateDivField(props);
+                fieldReference = new SeparateDivField(props);
                 break;
             case FIELD_TYPE.section:
-                generator = new SectionField(props);
+                fieldReference = new SectionField(props);
+                break;
+            case FIELD_TYPE.section_radio:
+                fieldReference = new SectionRadioField(props);
                 break;
             default: 
-                generator = new DefaultTextField(props);
+                fieldReference = new DefaultTextField(props);
         }
 
-        return generator;
+        return fieldReference;
     }
 
     /**

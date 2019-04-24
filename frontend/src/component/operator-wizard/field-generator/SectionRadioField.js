@@ -1,8 +1,7 @@
 import React from "react";
 import { FieldGeneratorBase } from "./FieldGeneratorBase";
 import {
-    Radio,
-    Button
+    Radio
 } from "@patternfly/react-core";
 
 import { FIELD_TYPE, FieldGeneratorFactory } from "./FieldGeneratorFactory";
