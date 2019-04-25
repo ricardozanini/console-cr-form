@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ElementFactory from "../element-component/ElementFactory";
+import { Form } from "@patternfly/react-core";
 
 /**
  * The Page component to handle each element individually.
@@ -74,11 +75,13 @@ export default class Page extends Component {
 
   render() {
     return (
-      <div key={"page" + this.props.pageNumber}>
-        {this.state.elements.map(element => {
-          return element.getJsx();
-        })}
-      </div>
+      <Form id={"form-page-" + this.props.pageNumber}>
+        <div key={"page" + this.props.pageNumber}>
+          {this.state.elements.map(element => {
+            return element.getJsx();
+          })}
+        </div>
+      </Form>
     );
   }
 }
