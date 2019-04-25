@@ -79,8 +79,8 @@ export class ObjectField {
     if (this.elementAddCount > 0) {
       this.props.page.deleteElements(
         this.props.fieldNumber +
-          this.elementChunkCount * this.elementAddCount -
-          1,
+          1 +
+          this.elementChunkCount * (this.elementAddCount - 1),
         this.elementChunkCount
       );
       this.elementAddCount--;
