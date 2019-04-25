@@ -19,9 +19,13 @@ export class ButtonElement {
     this.props = props;
     this.key =
       props.pageNumber + "-form-key-" + props.buttonDef.label + props.buttonId;
+    this.onCancel = this.onCancel.bind(this);
+    this.onClose = this.onClose.bind(this);
+    this.onNext = this.onNext.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
-  generateJsx() {
+  getJsx() {
     var clickEvent;
     var buttonRole = "secondary";
     switch (this.props.buttonDef.action) {
@@ -39,7 +43,6 @@ export class ButtonElement {
         clickEvent = this.onClose;
         break;
     }
-
     return (
       <Button variant={buttonRole} key={this.key} onClick={clickEvent}>
         {this.props.buttonDef.label}

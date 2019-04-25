@@ -292,7 +292,7 @@ export const MockupData_JSON = {
                 " If you are not using referrals, you can ignore this option. When using referrals, this option denotes the attribute name which contains users defined for a certain role, for example member, if the role object is inside the referral. Users are checked against the content of this attribute name. If this option is not set, the check will always fail, so role objects cannot be stored in a referral tree"
             }
           ]
-        },
+        } /*,
         {
           label: "Roles Properties",
           type: "text",
@@ -372,7 +372,7 @@ export const MockupData_JSON = {
           jsonPath: "$.spec.commonConfig.mavenPassword",
           default: "",
           description: "The password to use for the mavenUser."
-        }
+        }*/
       ]
     },
     {

@@ -1,40 +1,53 @@
 import React from "react";
-import { FieldBase } from "./FieldBase";
+
 import { FormGroup, Button } from "@patternfly/react-core";
 import { PlusCircleIcon, MinusCircleIcon } from "@patternfly/react-icons";
+import FieldFactory from "./FieldFactory";
 
-import { FIELD_TYPE, FieldFactory } from "./FieldFactory";
-
-export class SectionField extends FieldBase {
+export class SectionField {
   constructor(props) {
-    super(props);
+    this.props = props;
   }
 
-  doGenerateJsx() {
-    var section = this.field.label + "section";
+  getJsx() {
+    var section = this.props.fieldDef.label + "section";
     var jsxArray = [];
     var iconIdPlus = section + "plus";
     var iconIdMinus = section + "minus";
 
     var fieldJsx = (
-      <FormGroup fieldId={this.fieldGroupId} key={this.fieldGroupKey}>
+      <FormGroup
+        fieldId={this.props.ids.fieldGroupId}
+        key={this.props.ids.fieldGroupKey}
+      >
         <Button
           variant="link"
-          id={this.fieldId}
-          key={this.fieldKey}
-          fieldnumber={this.fieldNumber}
+          id={this.props.ids.fieldId}
+          key={this.props.ids.fieldKey}
+          fieldnumber={this.props.ids.fieldNumber}
           onClick={this.expandSection}
           name={section}
           style={{ display: "inline-block" }}
         >
-          {this.field.label}
-          <PlusCircleIcon id={iconIdPlus} style={{ display: "block" }} />{" "}
-          <MinusCircleIcon id={iconIdMinus} style={{ display: "none" }} />
+          {this.props.fieldDef.label}
+          <PlusCircleIcon
+            key={"plus-" + this.props.ids.fieldKey}
+            id={iconIdPlus}
+            style={{ display: "block" }}
+          />{" "}
+          <MinusCircleIcon
+            key={"minus-" + this.props.ids.fieldKey}
+            id={iconIdMinus}
+            style={{ display: "none" }}
+          />
         </Button>
       </FormGroup>
     );
 
-    var children = FieldFactory.newInstances(this.field.fields, null);
+    var children = FieldFactory.newInstancesAsJsx(
+      this.props.fieldDef.fields,
+      null
+    );
     jsxArray.push(fieldJsx);
     fieldJsx = (
       <div id={section} key={section} style={{ display: "none" }}>
@@ -43,10 +56,6 @@ export class SectionField extends FieldBase {
     );
     jsxArray.push(fieldJsx);
     return jsxArray;
-  }
-
-  supports() {
-    return FIELD_TYPE.section;
   }
 
   expandSection = event => {

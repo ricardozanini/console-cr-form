@@ -9,6 +9,8 @@ import { SeparateDivField } from "./SeparateDivField";
 import { SectionField } from "./SectionField";
 import { DefaultTextField } from "./DefaultTextField";
 import { SectionRadioField } from "./SectionRadioField";
+import { ObjectField } from "./ObjectField";
+import { FieldUtils } from "./FieldUtils";
 
 export const FIELD_TYPE = {
   dropdown: "dropDown",
@@ -25,20 +27,22 @@ export const FIELD_TYPE = {
   sectionRadio: "section_radio"
 };
 
-export class FieldFactory {
+export default class FieldFactory {
   /**
-   * Creates a single instance of one field
+   * Creates a single instance of a field
    */
-  static newInstance(field, fieldNumber, pageNumber, jsonSchema) {
+  static newInstance(fieldDef, fieldNumber, pageNumber, jsonSchema, page) {
     var fieldReference;
     var props = {
-      field: field,
+      page: page,
+      fieldDef: fieldDef,
       fieldNumber: fieldNumber,
       pageNumber: pageNumber,
-      jsonSchema: jsonSchema
+      jsonSchema: jsonSchema,
+      ids: FieldUtils.generateIds(pageNumber, fieldNumber, fieldDef.label)
     };
     //TODO: rethink when we have the time
-    switch (field.type) {
+    switch (fieldDef.type) {
       case FIELD_TYPE.dropdown:
         fieldReference = new DropdownField(props);
         break;
@@ -69,6 +73,9 @@ export class FieldFactory {
       case FIELD_TYPE.sectionRadio:
         fieldReference = new SectionRadioField(props);
         break;
+      case FIELD_TYPE.object:
+        fieldReference = new ObjectField(props);
+        break;
       default:
         fieldReference = new DefaultTextField(props);
     }
@@ -79,7 +86,7 @@ export class FieldFactory {
   /**
    * Creates all instances based on a field array
    */
-  static newInstances(fieldDefs, jsonSchema, pageNumber) {
+  static newInstances(fieldDefs, jsonSchema, pageNumber, page) {
     var children = [];
     if (fieldDefs !== undefined && fieldDefs !== null && fieldDefs !== "") {
       fieldDefs.forEach((field, fieldNumber) => {
@@ -87,14 +94,31 @@ export class FieldFactory {
           field,
           fieldNumber,
           pageNumber,
-          jsonSchema
+          jsonSchema,
+          page
         );
         if (fieldGenerator !== null) {
-          console.log("Generating a child", field);
-          children.push(fieldGenerator.doGenerateJsx());
+          children.push(fieldGenerator);
         }
       });
     }
     return children;
+  }
+
+  /**
+   * Same as newInstances, but return an array of instances in the form of JSX.
+   */
+  static newInstancesAsJsx(fieldDefs, jsonSchema, pageNumber, page) {
+    var children = FieldFactory.newInstances(
+      fieldDefs,
+      jsonSchema,
+      pageNumber,
+      page
+    );
+    var childrenJsx = [];
+    children.forEach(child => {
+      childrenJsx.push(child.getJsx());
+    });
+    return childrenJsx;
   }
 }

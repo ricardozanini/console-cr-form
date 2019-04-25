@@ -13,7 +13,22 @@ export default class OperatorWizard extends Component {
       formValueB: "Six",
       allStepsValid: true
     };
+    this.toggleOpen = this.toggleOpen.bind(this);
+    this.onFormChangeA = this.onFormChangeA.bind(this);
+    this.onFormChangeB = this.onFormChangeB.bind(this);
+    this.onGoToStep = this.onGoToStep.bind(this);
+    this.areAllStepsValid = this.areAllStepsValid.bind(this);
+    this.onNext = this.onNext.bind(this);
+    this.onBack = this.onBack.bind(this);
+    this.onGoToStep = this.onGoToStep.bind(this);
+    this.onSave = this.onSave.bind(this);
   }
+
+  /*
+   * TODO: these events should address the state change of the Wizard.
+   * After each change, the state must be persisted in the local storage and
+   * bring back as soon as the user navigates to the Page
+   */
 
   toggleOpen = () => {
     this.setState(({ isOpen }) => ({

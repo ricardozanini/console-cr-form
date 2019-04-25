@@ -1,48 +1,43 @@
 import React from "react";
-import { FieldBase } from "./FieldBase";
 import validator from "validator";
 import { FormGroup, TextInput } from "@patternfly/react-core";
 
-import { FIELD_TYPE } from "./FieldFactory";
-
-export class EmailField extends FieldBase {
+export class EmailField {
   constructor(props) {
-    super(props);
+    this.props = props;
   }
 
-  doGenerateJsx() {
+  getJsx() {
     return (
       <FormGroup
-        label={this.field.label}
-        fieldId={this.fieldGroupId}
-        key={this.fieldGroupKey}
+        label={this.props.fieldDef.label}
+        fieldId={this.props.ids.fieldGroupId}
+        key={this.props.ids.fieldGroupKey}
       >
         <TextInput
           type="text"
-          id={this.fieldId}
-          key={this.fieldKey}
-          name={this.field.label}
+          id={this.props.ids.fieldId}
+          key={this.props.ids.fieldKey}
+          name={this.props.fieldDef.label}
           onChange={this.onChangeEmail}
-          jsonpath={this.field.jsonPath}
+          jsonpath={this.props.fieldDef.jsonPath}
         />
       </FormGroup>
     );
   }
 
-  supports() {
-    return FIELD_TYPE.email;
-  }
-
   onChangeEmail = value => {
     if (value != null && value != "" && !validator.isEmail(value)) {
       console.log("not valid email address: " + value);
+      /*TODO: fix
       this.setParentState({
         validationMessageEmail: "not valid email address"
-      });
+      });*/
     } else {
+      /*
       this.setParentState({
         validationMessageEmail: ""
-      });
+      });*/
     }
   };
 }
